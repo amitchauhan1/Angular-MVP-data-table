@@ -1,5 +1,5 @@
 <style [src]="./emp-model-prasentation.scss"></style>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="form-style-9">
     <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
         <ul>
@@ -71,7 +71,7 @@
                     value="true">Permanent
             </li>
             <li>
-                <span (click)="addNewAddress()" style="cursor:pointer;" class="fa fa-plus">Add new
+                <span (click)="addNewAddress()" style="cursor:pointer;" class="fa fa-plus"> Add new
                     Address</span><br><br>
 
                 <div formArrayName="address">
@@ -80,7 +80,7 @@
                         <div [formGroupName]="i">
                             <input formControlName="city" placeholder="city" class="field-style field-split align-left">
                             <input formControlName="zip" placeholder="zip" class="field-style field-split align-left">
-                        </div><span (click)="deleteAddress(i)" style="cursor:pointer;" class="fa fa-trash">Delete</span>
+                        </div><span (click)="deleteAddress(i)" style="cursor:pointer;" class="fa fa-minus"> Delete</span>
                     </div>
                 </div>
 

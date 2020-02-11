@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Employee } from '../Employee';
+import { Employee } from '../employee-model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class EmployeeService {
     return this.http.get<Employee>(`${this.baseUrl}Employee`);
   }
 
-  getEmployee(id:number):Observable<Employee>{
+  getEmployee(id: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.baseUrl}Employee/${id}`);
   }
 
@@ -53,8 +53,16 @@ export class EmployeeService {
    * Delete Employee Data
    * @param id Employee Id
    */
-  deleteEmployee(id: number){
+  deleteEmployee(id: number) {
     this.http.delete(`${this.baseUrl}Employee/${id}`).subscribe();
+  }
+
+  /**
+   * search employee server side
+   * @param q queary data
+   */
+  employeeSearch(q: string): Observable<Employee> {
+    return this.http.get<Employee>(`${this.baseUrl}Employee/?q=${q}`);
   }
 }
 

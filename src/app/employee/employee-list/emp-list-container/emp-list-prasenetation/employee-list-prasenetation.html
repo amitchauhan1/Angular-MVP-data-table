@@ -3,9 +3,10 @@
 <button (click)="addEmployee()" class="fa fa-plus add">Add Employee</button>
 
 <div class="container" style="display: block; margin: 0px;  width: 0px; height: 20px; padding: 0px; float: left;">
-  <input type="text" name="text" [(ngModel)]="searchText" placeholder="Search...">
+  <input type="text" [(ngModel)]="searchQuary" (keyup)="search()" placeholder="Search...">
   <div class="search"></div>
 </div>
+{{searchQuary}}
 <table class="table">
   <thead class="thead-dark">
     <tr>

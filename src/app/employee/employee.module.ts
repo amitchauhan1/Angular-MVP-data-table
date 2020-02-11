@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EmployeeRoutingModule } from './employee-routing.module';
-import { EmpListContainerComponent } from './emp-list/emp-list-container/emp-list-container';
-import { EmpListPrasenetationComponent } from './emp-list/emp-list-container/emp-list-prasenetation/emp-list-prasenetation';
+import { EmpListContainerComponent } from './employee-list/emp-list-container/employee-list-container';
+import { EmpListPrasenetationComponent } from './employee-list/emp-list-container/emp-list-prasenetation/employee-list-prasenetation';
 import { HttpClientModule } from '@angular/common/http';
-import { EmpModelComponent } from './emp-model/emp-model-container/emp-model-prasentation/emp-model-prasentation';
-import { EmpModelContainerComponent } from './emp-model/emp-model-container/emp-model-container';
+import { EmpModelComponent } from './employee-form/employee-from-container/employee-form-prasentation/employee-form-prasentation';
+import { EmpModelContainerComponent } from './employee-form/employee-from-container/employee-form-container';
 
 
 

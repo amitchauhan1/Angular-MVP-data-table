@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmpListContainerComponent } from './emp-list/emp-list-container/emp-list-container';
-import { EmpModelContainerComponent } from './emp-model/emp-model-container/emp-model-container';
+import { EmpListContainerComponent } from './employee-list/emp-list-container/employee-list-container';
+import { EmpModelContainerComponent } from './employee-form/employee-from-container/employee-form-container';
 
 const routes: Routes = [
   {
