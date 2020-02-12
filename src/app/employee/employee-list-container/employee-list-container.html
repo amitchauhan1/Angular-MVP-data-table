@@ -1,0 +1,6 @@
+<app-emp-list-ui
+            [employees]="employees$ | async"
+            (deleteEmpEvent)="deleteEmployee($event)"
+            (editEmpEvent)="editEmployee($event)"
+            (searchQueryEvent)="search($event)"
+            ></app-emp-list-ui>
