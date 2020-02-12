@@ -1,14 +1,15 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges, OnDestroy } from '@angular/core';
-import { FormArray } from '@angular/forms';
 import { Employee } from 'src/app/employee/employee-model';
-import { EmployeeFormPresentorService } from '../employee-form-presentor/employee-form-presenter';
+import { EmployeeFormPresenter } from '../employee-form-presenter/employee-form-presenter';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-form-ui',
-  templateUrl: './employee-form-prasentation.html',
-  styleUrls: ['./employee-form-prasentation.scss']
+  templateUrl: './employee-form-presentation.html',
+  styleUrls: ['./employee-form-presentation.scss'],
+  viewProviders: [EmployeeFormPresenter],
 })
-export class EmpModelComponent implements OnInit, OnChanges, OnDestroy {
+export class EmployeeFormPresentation implements OnInit, OnChanges, OnDestroy {
 
   // Get department data from container for using on drop down.
   @Input() department: object;
@@ -30,62 +31,63 @@ export class EmpModelComponent implements OnInit, OnChanges, OnDestroy {
    * Create event for update data
    */
   @Output() updateEmployeeEvent = new EventEmitter<Employee>();
+
+  /**
+   * Create event for Add new Employee
+   */
   @Output() addEmployeeEvent = new EventEmitter<Employee>();
 
   public dept: object;
-
   public empData: Employee;
 
   // Disabled submit button
-  public submitted = false;
+  public submitted:boolean;
   public empId: string;
-
+  public empForm: FormGroup;
 
   constructor(
-    private presenter: EmployeeFormPresentorService,
+    private presenter: EmployeeFormPresenter,
   ) {
-
-  }
-
-  // Employee form
-  empForm = this.presenter.empForm;
-
-  initaddress() {
-    this.presenter.initaddress();
+    this.submitted = false;
   }
 
   ngOnInit() {
+    // Employee form use.
+    this.empForm = this.presenter.getEmployeeForm();
   }
 
   ngOnChanges() {
     if (this.employee) {
       for (let i = 1; i < this.employee.address.length; i++) {
-        this.presenter.addNewAddress();
+        this.presenter.addNewAddress(this.empForm);
       }
       this.empForm.patchValue(this.employee);
     }
   }
 
+  public initAddress(): void {
+    this.presenter.initAddress();
+  }
   /**
    * Add multiple address
    */
-  addNewAddress() {
-    this.presenter.addNewAddress();
+  public addNewAddress(): void {
+    this.presenter.addNewAddress(this.empForm);
   }
 
   /**
    * delete existing address
    * @param index address index
    */
-  deleteAddress(index) {
-    this.presenter.deleteAddress(index);
+  public deleteAddress(index): void {
+    this.presenter.deleteAddress(index, this.empForm);
   }
 
   /**
    * Add Employee data
    * Edit Employee data
    */
-  onSubmit() {
+  public onSubmit(): void {
     this.submitted = true;
     if (this.employee) {
       this.updateEmployeeEvent.emit(this.empForm.value);

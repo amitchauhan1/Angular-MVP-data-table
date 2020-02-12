@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Employee } from '../../../employee-model';
 import { Router } from '@angular/router';
+import { Employee } from '../../employee-model';
 
 @Component({
   selector: 'app-emp-list-ui',
-  templateUrl: './employee-list-prasenetation.html',
-  styleUrls: ['./employee-list-prasenetation.scss']
+  templateUrl: './employee-list-presentation.html',
+  styleUrls: ['./employee-list-presentation.scss']
 })
-export class EmpListPrasenetationComponent implements OnInit {
+export class EmployeeListPresentation implements OnInit {
 
   /**
    * Get Employees data.
@@ -17,41 +17,36 @@ export class EmpListPrasenetationComponent implements OnInit {
   /**
    * Create Event for send emit employee id for delete
    */
-  @Output() deleteEmpEvent = new EventEmitter<Employee>();
+  @Output() deleteEmpEvent = new EventEmitter<number>();
 
   /**
    * Create Event for send emit employee id for edit
    */
-  @Output() editEmpEvent = new EventEmitter<Employee>();
+  @Output() editEmpEvent = new EventEmitter<number>();
 
   /**
    * create new event for search.
    */
-  @Output() searchQuraryEvent = new EventEmitter<Employee>();
+  @Output() searchQueryEvent = new EventEmitter<string>();
 
   // For search textbox
-  public searchQuary;
+  public searchQuery;
   order: string = 'name';
   reverse: boolean = false;
   constructor(
     private router: Router
-  ) { }
-
-  ngOnInit() {
+  ) { 
+    
   }
 
-  /**
-   * Add New employee
-   */
-  addEmployee() {
-    this.router.navigate(['employee-add']);
+  ngOnInit() {
   }
 
   /**
    * Employee delete from api
    * @param id Employee Id for delete
    */
-  deleteEmployee(id) {
+  public deleteEmployee(id: number): void {
     this.deleteEmpEvent.emit(id);
   }
 
@@ -59,15 +54,15 @@ export class EmpListPrasenetationComponent implements OnInit {
    * Employee edit record from api
    * @param id Employee Id for edit
    */
-  editEmployee(id) {
+  public editEmployee(id: number): void {
     this.editEmpEvent.emit(id);
   }
 
   /**
    * search for emit event
    */
-  search() {
-    this.searchQuraryEvent.emit(this.searchQuary);
+  public search(): void {
+    this.searchQueryEvent.emit(this.searchQuery);
   }
 
   // set order for sorting

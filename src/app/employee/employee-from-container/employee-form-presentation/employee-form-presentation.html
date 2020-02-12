@@ -18,11 +18,9 @@
                         Email is required.
                     </div>
                 </div>
-                <input type="text" formControlName="name" class="field-style field-split align-left" placeholder="name"
-                    required>
+                <input type="text" formControlName="name" class="field-style field-split align-left" placeholder="name">
 
-                <input type="text" formControlName="email" class="field-style field-split align-left"
-                    placeholder="email">
+                <input type="text" formControlName="email" class="field-style field-split align-left" placeholder="email">
             </li>
 
             <li>
@@ -41,15 +39,16 @@
                         Gender is required.
                     </div>
                 </div>
-                <input type="radio" formControlName="gender" name="gender" value="male" checked> Male &nbsp;&nbsp;&nbsp;
-                <input type="radio" formControlName="gender" name="gender" value="female"> Female &nbsp;&nbsp;&nbsp;
-                <input type="radio" formControlName="gender" name="gender" value="other"> Other
+                <input type="radio" formControlName="gender" value="male" checked> Male &nbsp;&nbsp;&nbsp;
+                <input type="radio" formControlName="gender" value="female"> Female &nbsp;&nbsp;&nbsp;
+                <input type="radio" formControlName="gender" value="other"> Other
 
             </li>
 
             <li>
 
                 <select formControlName="department" class="field-style field-split align-left">
+                    <option value="">select department</option>
                     <option *ngFor="let item of department" value="{{item}}">{{item}}</option>
                 </select>
                 <div *ngIf="f.department.invalid && (f.department.dirty || f.department.touched)" class="errors">

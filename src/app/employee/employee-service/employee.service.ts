@@ -4,22 +4,21 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from '../employee-model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EmployeeService {
   private baseUrl: string;
+  private setOrder: string = 'asc';
   constructor(
     private http: HttpClient,
   ) {
-    this.baseUrl = 'http://localhost:3000/';
+    this.baseUrl = environment.API;
   }
 
   /**
    * Get all Employee data from server
    */
-  getEmployees(): Observable<Employee> {
-    return this.http.get<Employee>(`${this.baseUrl}Employee`);
+  getEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.baseUrl}Employee`);
   }
 
   getEmployee(id: number): Observable<Employee> {
@@ -29,15 +28,15 @@ export class EmployeeService {
   /**
    * Get all Department name from server
    */
-  getDepartment() {
-    return this.http.get(`${this.baseUrl}department`);
+  getDepartment(): Observable<Array<string>> {
+    return this.http.get<Array<string>>(`${this.baseUrl}department`);
   }
   /**
    * Add Employee in database
    * @param empData emoloyee new data
    */
-  addEmployee(empData: object) {
-    this.http.post(`${this.baseUrl}Employee`, empData).subscribe();
+  addEmployee(empData: object): Observable<Employee> {
+    return this.http.post<Employee>(`${this.baseUrl}Employee`, empData);
   }
 
   /**
@@ -45,24 +44,32 @@ export class EmployeeService {
    * @param empId Employee Id
    * @param empData Employee updated data
    */
-  updateEmployee(empId: number, empData: object) {
-    this.http.put(`${this.baseUrl}Employee/${empId}`, empData).subscribe();
+  updateEmployee(empId: number, empData: object): Observable<Employee> {
+    return this.http.put<Employee>(`${this.baseUrl}Employee/${empId}`, empData);
   }
 
   /**
    * Delete Employee Data
    * @param id Employee Id
    */
-  deleteEmployee(id: number) {
-    this.http.delete(`${this.baseUrl}Employee/${id}`).subscribe();
+  deleteEmployee(id: number): Observable<Employee> {
+    return this.http.delete<Employee>(`${this.baseUrl}Employee/${id}`);
   }
 
   /**
    * search employee server side
-   * @param q queary data
+   * @param q quarry data
    */
-  employeeSearch(q: string): Observable<Employee> {
-    return this.http.get<Employee>(`${this.baseUrl}Employee/?q=${q}`);
+  employeeSearch(q: string): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.baseUrl}Employee?q=${q}`);
+  }
+
+  employeeSort(value: string, order: boolean): Observable<Employee[]> {
+    if (order === true) {
+      this.setOrder = 'asc';
+    } else {
+      this.setOrder = 'desc';
+    }
+    return this.http.get<Employee[]>(`${this.baseUrl}Employee?_sort=${value}&_order=${this.setOrder}`);
   }
 }
-
