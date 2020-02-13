@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee } from '../../employee-model';
+import { EmployeeListPresenter } from '../employee-list-presenter/employee-list-presenter';
 
 @Component({
   selector: 'app-emp-list-ui',
@@ -29,17 +30,36 @@ export class EmployeeListPresentation implements OnInit {
    */
   @Output() searchQueryEvent = new EventEmitter<string>();
 
-  // For search textbox
-  public searchQuery;
-  order: string = 'name';
-  reverse: boolean = false;
+  /**
+   * create new event for sort send data.
+   */
+  @Output() sortQueryEvent = new EventEmitter<string>();
+
+  /**
+  * create new event for sort send order.
+  */
+  @Output() sortOrderEvent = new EventEmitter<string>();
+
+  // For search text box
+  public searchQuery: string;
+
+  public order: string = 'name';
+  public reverse: boolean = false;
+  setNewOrder: string = 'asc';
+
   constructor(
-    private router: Router
-  ) { 
-    
+    private employeeListPresenter: EmployeeListPresenter
+  ) {
+
   }
 
   ngOnInit() {
+  }
+
+  ngDoCheck() {
+    this.order = this.employeeListPresenter.order;
+    this.reverse = this.employeeListPresenter.reverse;
+    this.setNewOrder = this.employeeListPresenter.setNewOrder;
   }
 
   /**
@@ -65,11 +85,18 @@ export class EmployeeListPresentation implements OnInit {
     this.searchQueryEvent.emit(this.searchQuery);
   }
 
-  // set order for sorting
+  /**
+   * set order for sorting
+   * @param value Field name
+   */
   setOrder(value: string) {
-    if (this.order === value) {
-      this.reverse = !this.reverse;
-    }
-    this.order = value;
+    // Call sorting Method
+    this.employeeListPresenter.setOrder(value);
+
+    //Emit Sort value
+    this.sortQueryEvent.emit(value);
+
+    //Emit Set new order
+    this.sortOrderEvent.emit(this.setNewOrder);
   }
 }

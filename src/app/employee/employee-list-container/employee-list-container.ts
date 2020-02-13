@@ -13,17 +13,28 @@ import { EmployeeListPresenter } from './employee-list-presenter/employee-list-p
   viewProviders: [EmployeeListPresenter]
 })
 export class EmployeeListContainer implements OnInit {
+  // For get all employee data.
   public employees$: Observable<Employee[]>;
+
+  // Search query store only
+  private query: string;
+
+  // sort default value
+  private field:string;
+  private order:string;
 
   constructor(
     private api: EmployeeService,
     private router: Router,
   ) {
+    this.query = '';
+    this.field = 'name';
+    this.order = 'asc';
   }
 
   ngOnInit() {
     // Get all employee data from json server
-    this.employees$ = this.api.getEmployees();
+    this.employees$ = this.api.getEmployees(this.field, this.order, this.query);
   }
 
   /**
@@ -32,11 +43,10 @@ export class EmployeeListContainer implements OnInit {
    */
   public deleteEmployee(id: number) {
     if (confirm('Do you want to delete?')) {
-      this.api.deleteEmployee(id).subscribe(data =>{
-        if(data){
-          this.employees$ = this.api.getEmployees();
+      this.api.deleteEmployee(id).subscribe(data => {
+        if (data) {
+          this.employees$ = this.api.getEmployees(this.field, this.order, this.query);
         }
-        alert('Data Not deleted');
       });
     }
   }
@@ -51,9 +61,27 @@ export class EmployeeListContainer implements OnInit {
 
   /**
    * search data to pass in employees$.
-   * @param $event query data
+   * @param query query data for search
    */
   public search(query: string): void {
-    this.employees$ = this.api.employeeSearch(query);
+    this.employees$ = this.api.getEmployees(this.field, this.order, query);
+  }
+
+  /**
+   * Sorting Fields wise
+   * @param field set new field for sorting
+   */
+  public sort(field:string): void{
+    this.employees$ = this.api.getEmployees(field, this.order, this.query);
+  }
+
+  /**
+   * New Order field wise.
+   * @param order New Order 'asc', 'desc'
+   */
+  public sortOrder(order: string): void {
+    this.order = order;
+    console.log(order);
+    
   }
 }
