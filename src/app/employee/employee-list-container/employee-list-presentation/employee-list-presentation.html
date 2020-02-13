@@ -7,33 +7,32 @@
   <div class="search"></div>
 </div>
 <br><br>
-<table class="table">
+<table class="form-style-9">
   <thead class="thead-dark">
     <tr>
-    <tr>
       <th scope="col" [class.active]="order === 'name'" (click)="setOrder('name')">
-        Full-Name<span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+        Full-Name<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
       </th>
       <th scope="col" [class.active]="order === 'email'" (click)="setOrder('email')">
-        Email<span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+        Email<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
       </th>
       <th scope="col" [class.active]="order === 'mobile'" (click)="setOrder('mobile')">
-        Mobile<span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+        Mobile<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
       </th>
       <th scope="col" [class.active]="order === 'address'" (click)="setOrder('address')">
-        Address<span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+        Address<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
       </th>
       <th scope="col" [class.active]="order === 'gender'" (click)="setOrder('gender')">
-        Gender<span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+        Gender<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
       </th>
       <th scope="col" [class.active]="order === 'department'" (click)="setOrder('department')">
-        Depaerment<span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+        Depaerment<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
       </th>
       <th scope="col" [class.active]="order === 'hiredate'" (click)="setOrder('hiredate')">
-        Hire-date<span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+        Hire-date<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
       </th>
       <th scope="col" [class.active]="order === 'permanent'" (click)="setOrder('permanent')">
-        Permanent<span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+        Permanent<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
       </th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>

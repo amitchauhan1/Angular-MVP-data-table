@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 import { Employee } from '../employee-model';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class EmployeeService {
+
+  // Use for Url
   private baseUrl: string;
-  private setOrder: string = 'asc';
+
   constructor(
     private http: HttpClient,
   ) {
@@ -62,21 +65,4 @@ export class EmployeeService {
   deleteEmployee(id: number): Observable<Employee> {
     return this.http.delete<Employee>(`${this.baseUrl}Employee/${id}`);
   }
-
-  // /**
-  //  * search employee server side
-  //  * @param q quarry data
-  //  */
-  // employeeSearch(q: string): Observable<Employee[]> {
-  //   return this.http.get<Employee[]>(`${this.baseUrl}Employee?q=${q}`);
-  // }
-
-  // employeeSort(value: string, order: boolean): Observable<Employee[]> {
-  //   if (order === true) {
-  //     this.setOrder = 'asc';
-  //   } else {
-  //     this.setOrder = 'desc';
-  //   }
-  //   return this.http.get<Employee[]>(`${this.baseUrl}Employee?_sort=${value}&_order=${this.setOrder}`);
-  // }
 }

@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { Employee } from '../../employee-model';
+import { Component, OnInit, Input, EventEmitter, Output, DoCheck } from '@angular/core';
+
 import { EmployeeListPresenter } from '../employee-list-presenter/employee-list-presenter';
+import { Employee } from '../../employee-model';
 
 @Component({
   selector: 'app-emp-list-ui',
   templateUrl: './employee-list-presentation.html',
   styleUrls: ['./employee-list-presentation.scss']
 })
-export class EmployeeListPresentation implements OnInit {
+export class EmployeeListPresentation implements OnInit, DoCheck {
 
   /**
    * Get Employees data.
@@ -33,33 +33,44 @@ export class EmployeeListPresentation implements OnInit {
   /**
    * create new event for sort send data.
    */
-  @Output() sortQueryEvent = new EventEmitter<string>();
+  @Output() sortFieldEvent = new EventEmitter<string>();
 
   /**
-  * create new event for sort send order.
-  */
+   * create new event for sort send order.
+   */
   @Output() sortOrderEvent = new EventEmitter<string>();
 
   // For search text box
   public searchQuery: string;
-
-  public order: string = 'name';
-  public reverse: boolean = false;
-  setNewOrder: string = 'asc';
+  // Use for search query
+  public query: string;
+  // emit field name
+  public field: string;
+  // send order
+  public order: string;
+  // set order
+  public reverse: boolean;
 
   constructor(
     private employeeListPresenter: EmployeeListPresenter
   ) {
-
+    this.query = '';
+    this.field = 'name';
+    this.order = 'asc';
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    // Default init time send value of search query
+    this.searchQueryEvent.emit(this.query);
+    // Default init time set name of field
+    this.sortFieldEvent.emit(this.field);
+    // Default init time set order ascending
+    this.sortOrderEvent.emit(this.employeeListPresenter.changeOrder());
   }
 
-  ngDoCheck() {
+  ngDoCheck(): void {
     this.order = this.employeeListPresenter.order;
     this.reverse = this.employeeListPresenter.reverse;
-    this.setNewOrder = this.employeeListPresenter.setNewOrder;
   }
 
   /**
@@ -89,14 +100,14 @@ export class EmployeeListPresentation implements OnInit {
    * set order for sorting
    * @param value Field name
    */
-  setOrder(value: string) {
+  public setOrder(value: string): void {
     // Call sorting Method
     this.employeeListPresenter.setOrder(value);
 
-    //Emit Sort value
-    this.sortQueryEvent.emit(value);
+    // Emit Sort value
+    this.sortFieldEvent.emit(value);
 
-    //Emit Set new order
-    this.sortOrderEvent.emit(this.setNewOrder);
+    // Emit Set new order
+    this.sortOrderEvent.emit(this.employeeListPresenter.changeOrder());
   }
 }

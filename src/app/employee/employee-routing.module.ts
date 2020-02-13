@@ -5,21 +5,21 @@ import { EmployeeFormContainer } from './employee-from-container/employee-form-c
 
 const routes: Routes = [
   {
-    path:'employee-list',
-    component:EmployeeListContainer
+    path: 'employee-list',
+    component: EmployeeListContainer
   },
   {
-    path:'employee-add',
-    component:EmployeeFormContainer
+    path: 'employee-add',
+    component: EmployeeFormContainer
   },
   {
-    path:'employee-edit/:id',
-    component:EmployeeFormContainer
+    path: 'employee-edit/:id',
+    component: EmployeeFormContainer
   },
   {
-    path:'',
-    redirectTo:'employee-list',
-    pathMatch:'full'
+    path: '',
+    redirectTo: 'employee-list',
+    pathMatch: 'full'
   }
 ];
 

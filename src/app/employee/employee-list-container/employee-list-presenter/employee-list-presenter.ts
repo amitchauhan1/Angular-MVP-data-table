@@ -17,7 +17,9 @@ export class EmployeeListPresenter {
     this.reverse = false;
     this.setNewOrder = 'asc';
   }
-  ngOnInit(): string {
+
+  // Change Order on click
+  changeOrder(): string {
     // If Reverse true set 'asc' otherwise set 'desc'.
     if (this.reverse === true) {
       return this.setNewOrder = 'asc';
@@ -25,7 +27,7 @@ export class EmployeeListPresenter {
       return this.setNewOrder = 'desc';
     }
   }
-  
+
   // set order for sorting
   public setOrder(value: string): boolean | string {
     if (this.order === value) {

@@ -1,20 +1,16 @@
-@import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
+.form-style-9{
+	width: 500px;
+	background: #FAFAFA;
+	border-radius: 10px;
+  border: 4px solid #305A72;
+}
 .pointer{
-    cursor: pointer;
+	cursor: pointer;
 }
-.div{
-  font-family:'cursive';
-}
-#c2 {
-  // background:green;
-  float: right;
-}
-table{
-  border: 1px;
-  border-block-end-color: aqua;
-}
+
 thead th {
     cursor: pointer;
+    border-width: 0ch;
     width: 50%;
     // border:0.1px solid #456879; 
     background: rgb(2, 87, 80);
@@ -35,16 +31,6 @@ $baseColor: #398B93;
 $imageSmall: 60px;
 $padding: 20px;
 
-
-
-.header {
-   background-color: darken($baseColor, 5%);
-   color: white;
-   font-size: 2.5em;
-   padding: 1rem;
-   text-align: center;
-   text-transform: uppercase;
-}
 table {
    width: 100%;
    td, th { 
@@ -90,23 +76,7 @@ table {
     padding: 1%;
   }
 
-  @import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  background: #252525;
-}
-
+ 
 .container {
   position: relative;
   margin: auto;

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { EmployeeService } from '../employee-service/employee.service';
 import { Employee } from '../employee-model';
+import { EmployeeService } from '../employee-service/employee.service';
 import { EmployeeListPresenter } from './employee-list-presenter/employee-list-presenter';
 
 
@@ -13,6 +13,7 @@ import { EmployeeListPresenter } from './employee-list-presenter/employee-list-p
   viewProviders: [EmployeeListPresenter]
 })
 export class EmployeeListContainer implements OnInit {
+
   // For get all employee data.
   public employees$: Observable<Employee[]>;
 
@@ -20,19 +21,17 @@ export class EmployeeListContainer implements OnInit {
   private query: string;
 
   // sort default value
-  private field:string;
-  private order:string;
+  private field: string;
+  private order: string;
 
   constructor(
     private api: EmployeeService,
     private router: Router,
   ) {
-    this.query = '';
-    this.field = 'name';
-    this.order = 'asc';
   }
 
   ngOnInit() {
+
     // Get all employee data from json server
     this.employees$ = this.api.getEmployees(this.field, this.order, this.query);
   }
@@ -65,14 +64,16 @@ export class EmployeeListContainer implements OnInit {
    */
   public search(query: string): void {
     this.employees$ = this.api.getEmployees(this.field, this.order, query);
+    this.query = query;
   }
 
   /**
    * Sorting Fields wise
    * @param field set new field for sorting
    */
-  public sort(field:string): void{
+  public sort(field: string): void {
     this.employees$ = this.api.getEmployees(field, this.order, this.query);
+    this.field = field;
   }
 
   /**
@@ -81,7 +82,5 @@ export class EmployeeListContainer implements OnInit {
    */
   public sortOrder(order: string): void {
     this.order = order;
-    console.log(order);
-    
   }
 }
