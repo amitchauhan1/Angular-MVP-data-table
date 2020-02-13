@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+
 import { EmployeeService } from './employee-service/employee.service';
 import { EmployeeListContainer } from './employee-list-container/employee-list-container';
 import { EmployeeFormContainer } from './employee-from-container/employee-form-container';
@@ -12,7 +13,7 @@ import { EmployeeFormPresentation } from './employee-from-container/employee-for
 
 
 @NgModule({
-  declarations: [EmployeeListContainer, EmployeeListPresentation,EmployeeFormContainer, EmployeeFormPresentation,],
+  declarations: [EmployeeListContainer, EmployeeListPresentation, EmployeeFormContainer, EmployeeFormPresentation],
   imports: [
     CommonModule,
     EmployeeRoutingModule,
@@ -20,7 +21,7 @@ import { EmployeeFormPresentation } from './employee-from-container/employee-for
     FormsModule,
     HttpClientModule
   ],
-  providers:[EmployeeService]
+  providers: [EmployeeService],
 
 })
 export class EmployeeModule { }

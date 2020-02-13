@@ -13,15 +13,15 @@ export class EmployeeFormPresenter {
   public initAddress(): FormGroup {
     return this.fb.group({
       city: ['', Validators.required],
-        zip: ['', Validators.required]
+      zip: ['', Validators.required]
     });
   }
   // Employee form
-  public getEmployeeForm(): FormGroup{
+  public getEmployeeForm(): FormGroup {
     return this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', Validators.required],
-      mobile: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
       gender: ['', Validators.required],
       address: this.fb.array([this.initAddress()]),
       department: ['', Validators.required],
@@ -44,7 +44,7 @@ export class EmployeeFormPresenter {
    * @param index address index
    * @param empForm Employee Form
    */
-  public deleteAddress(index: number,empForm: FormGroup): void {
+  public deleteAddress(index: number, empForm: FormGroup): void {
     const control = empForm.controls.address as FormArray;
     control.removeAt(index);
   }

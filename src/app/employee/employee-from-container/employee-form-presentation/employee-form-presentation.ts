@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges, OnDestroy } from '@angular/core';
 import { Employee } from 'src/app/employee/employee-model';
 import { EmployeeFormPresenter } from '../employee-form-presenter/employee-form-presenter';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-form-ui',
@@ -9,22 +9,26 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./employee-form-presentation.scss'],
   viewProviders: [EmployeeFormPresenter],
 })
-export class EmployeeFormPresentation implements OnInit, OnChanges, OnDestroy {
+export class EmployeeFormPresentation implements OnInit, OnDestroy {
 
   // Get department data from container for using on drop down.
   @Input() department: object;
 
   // Get employee data from container for update.
-  @Input() employee: Employee;
-
-  // @Input() set employee(value: Employee) {
-  //   if (value) {
-  //     this.empForm.patchValue(value);
-  //     this.empData = value;
-  //   }
-  // }
-  // get employee() {
-  //   return this.empData;
+  @Input() set employee(value: Employee) {
+    if (value) {
+      this.employeeData = value;
+      if (this.employeeData) {
+            for (let i = 1; i < this.employeeData.address.length; i++) {
+              this.employeeFormPresenter.addNewAddress(this.employeeForm);
+            }
+            this.employeeForm.patchValue(this.employeeData);
+          }
+    }
+  }
+  // get employee(): Employee {
+  //   // this.employeeForm.patchValue(this.employeeData);
+  //   return this.employeeData;
   // }
 
   /**
@@ -37,50 +41,37 @@ export class EmployeeFormPresentation implements OnInit, OnChanges, OnDestroy {
    */
   @Output() addEmployeeEvent = new EventEmitter<Employee>();
 
-  public dept: object;
-  public empData: Employee;
+  public employeeData: Employee;
 
   // Disabled submit button
-  public submitted:boolean;
-  public empId: string;
-  public empForm: FormGroup;
+  public employeeForm: FormGroup;
 
   constructor(
-    private presenter: EmployeeFormPresenter,
+    private employeeFormPresenter: EmployeeFormPresenter,
   ) {
-    this.submitted = false;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Employee form use.
-    this.empForm = this.presenter.getEmployeeForm();
-  }
-
-  ngOnChanges() {
-    if (this.employee) {
-      for (let i = 1; i < this.employee.address.length; i++) {
-        this.presenter.addNewAddress(this.empForm);
-      }
-      this.empForm.patchValue(this.employee);
-    }
+    this.employeeForm = this.employeeFormPresenter.getEmployeeForm();
   }
 
   public initAddress(): void {
-    this.presenter.initAddress();
+    this.employeeFormPresenter.initAddress();
   }
   /**
    * Add multiple address
    */
   public addNewAddress(): void {
-    this.presenter.addNewAddress(this.empForm);
+    this.employeeFormPresenter.addNewAddress(this.employeeForm);
   }
 
   /**
    * delete existing address
    * @param index address index
    */
-  public deleteAddress(index): void {
-    this.presenter.deleteAddress(index, this.empForm);
+  public deleteAddress(index: number): void {
+    this.employeeFormPresenter.deleteAddress(index, this.employeeForm);
   }
 
   /**
@@ -88,19 +79,21 @@ export class EmployeeFormPresentation implements OnInit, OnChanges, OnDestroy {
    * Edit Employee data
    */
   public onSubmit(): void {
-    this.submitted = true;
     if (this.employee) {
-      this.updateEmployeeEvent.emit(this.empForm.value);
+      this.updateEmployeeEvent.emit(this.employeeForm.value);
     } else {
-      this.addEmployeeEvent.emit(this.empForm.value);
+      this.addEmployeeEvent.emit(this.employeeForm.value);
     }
   }
 
   // instance of employee form
-  get f() { return this.empForm.controls; }
+  get f() { return this.employeeForm.controls; }
+
+  // address of instance
+  get add(): FormArray { return this.employeeForm.get('address') as FormArray; }
 
   ngOnDestroy() {
-    this.empForm.reset();
+    this.employeeForm.reset();
   }
 }
 
