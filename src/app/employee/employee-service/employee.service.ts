@@ -16,11 +16,18 @@ export class EmployeeService {
 
   /**
    * Get all Employee data from server
+   * @param field use for sorting field
+   * @param order sorting field order
+   * @param query search query
    */
-  getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.baseUrl}Employee`);
+  getEmployees(field: string, order: string, query: string): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.baseUrl}Employee?_sort=${field}&_order=${order}&q=${query}`);
   }
 
+  /**
+   * Get employee single record using id
+   * @param id Employee Id
+   */
   getEmployee(id: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.baseUrl}Employee/${id}`);
   }
@@ -33,9 +40,9 @@ export class EmployeeService {
   }
   /**
    * Add Employee in database
-   * @param empData emoloyee new data
+   * @param empData employee new data
    */
-  addEmployee(empData: object): Observable<Employee> {
+  addEmployee(empData: Employee): Observable<Employee> {
     return this.http.post<Employee>(`${this.baseUrl}Employee`, empData);
   }
 
@@ -44,7 +51,7 @@ export class EmployeeService {
    * @param empId Employee Id
    * @param empData Employee updated data
    */
-  updateEmployee(empId: number, empData: object): Observable<Employee> {
+  updateEmployee(empId: number, empData: Employee): Observable<Employee> {
     return this.http.put<Employee>(`${this.baseUrl}Employee/${empId}`, empData);
   }
 
@@ -56,20 +63,20 @@ export class EmployeeService {
     return this.http.delete<Employee>(`${this.baseUrl}Employee/${id}`);
   }
 
-  /**
-   * search employee server side
-   * @param q quarry data
-   */
-  employeeSearch(q: string): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.baseUrl}Employee?q=${q}`);
-  }
+  // /**
+  //  * search employee server side
+  //  * @param q quarry data
+  //  */
+  // employeeSearch(q: string): Observable<Employee[]> {
+  //   return this.http.get<Employee[]>(`${this.baseUrl}Employee?q=${q}`);
+  // }
 
-  employeeSort(value: string, order: boolean): Observable<Employee[]> {
-    if (order === true) {
-      this.setOrder = 'asc';
-    } else {
-      this.setOrder = 'desc';
-    }
-    return this.http.get<Employee[]>(`${this.baseUrl}Employee?_sort=${value}&_order=${this.setOrder}`);
-  }
+  // employeeSort(value: string, order: boolean): Observable<Employee[]> {
+  //   if (order === true) {
+  //     this.setOrder = 'asc';
+  //   } else {
+  //     this.setOrder = 'desc';
+  //   }
+  //   return this.http.get<Employee[]>(`${this.baseUrl}Employee?_sort=${value}&_order=${this.setOrder}`);
+  // }
 }
