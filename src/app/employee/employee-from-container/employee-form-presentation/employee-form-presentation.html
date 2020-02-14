@@ -1,7 +1,6 @@
 <style [src]="./emp-model-prasentation.scss"></style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="form-style-9">
-    {{employee | json}}
     <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
         <h3>Employee Form</h3><br>
         <ul>
