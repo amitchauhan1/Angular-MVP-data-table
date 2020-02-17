@@ -21,6 +21,7 @@ export class EmployeeListContainer implements OnInit {
   private query: string;
 
   // sort default value
+  private queryData: object;
   private field: string;
   private order: string;
 
@@ -71,16 +72,11 @@ export class EmployeeListContainer implements OnInit {
    * Sorting Fields wise
    * @param field set new field for sorting
    */
-  public sort(field: string): void {
-    this.employees$ = this.api.getEmployees(field, this.order, this.query);
-    this.field = field;
+  public sort(queryData: any): void {
+    this.queryData = queryData;
+    this.field = queryData.query;
+    this.order = queryData.order;
+    this.employees$ = this.api.getEmployees(this.field, this.order, this.query);
   }
 
-  /**
-   * New Order field wise.
-   * @param order New Order 'asc', 'desc'
-   */
-  public sortOrder(order: string): void {
-    this.order = order;
-  }
 }

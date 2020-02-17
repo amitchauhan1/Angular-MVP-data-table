@@ -43,25 +43,17 @@ export class EmployeeFormContainer implements OnInit {
 
   // Add new employee.
   public addEmployee(employeeData: Employee): void {
-    this.api.addEmployee(employeeData).subscribe(data => {
-      if (data) {
-        alert('Add Employee successfully');
-        this.location.back();
-      } else {
-        alert('Unsuccessfully Add Employee');
-      }
+    this.api.addEmployee(employeeData).subscribe(() => {
+      alert('Add Employee successfully');
+      this.location.back();
     });
   }
 
   // Update employee data.
   public updateEmployee(employeeData: Employee): void {
-    this.api.updateEmployee(Number(this.employeeId), employeeData).subscribe(data => {
-      if (data) {
-        alert('Add Employee successfully');
-        this.location.back();
-      } else {
-        alert('Unsuccessfully Add Employee');
-      }
+    this.api.updateEmployee(Number(this.employeeId), employeeData).subscribe(() => {
+      alert('Update Employee data successfully');
+      this.location.back();
     });
   }
 }
