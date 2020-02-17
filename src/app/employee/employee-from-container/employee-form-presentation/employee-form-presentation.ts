@@ -27,7 +27,6 @@ export class EmployeeFormPresentation implements OnInit, OnDestroy {
     }
   }
   get employee(): Employee {
-    // this.employeeForm.patchValue(this.employeeData);
     return this.employeeData;
   }
 

@@ -6,54 +6,6 @@
   ],
   "Employee": [
     {
-      "name": "dhruvit",
-      "email": "drm@gmail.com",
-      "mobile": "2939349499",
-      "gender": "male",
-      "address": [
-        {
-          "city": "eee",
-          "zip": 1111
-        }
-      ],
-      "department": "Devloper",
-      "hiredate": "2020-02-04",
-      "permanent": true,
-      "id": 4
-    },
-    {
-      "name": "sunil",
-      "email": "sun@gmail.com",
-      "mobile": "8888838838",
-      "gender": "male",
-      "address": [
-        {
-          "city": "valasd",
-          "zip": "396001"
-        }
-      ],
-      "department": "Devloper",
-      "hiredate": "2020-02-18",
-      "permanent": false,
-      "id": 6
-    },
-    {
-      "name": "anil",
-      "email": "anil@gmail.com",
-      "mobile": "7878678678",
-      "gender": "male",
-      "address": [
-        {
-          "city": "eee",
-          "zip": 4444
-        }
-      ],
-      "department": "Software Engineer",
-      "hiredate": "2020-02-19",
-      "permanent": true,
-      "id": 10
-    },
-    {
       "name": "sssss",
       "email": "ssss@ss",
       "mobile": "1212121212",
@@ -112,6 +64,41 @@
       "hiredate": "2020-02-04",
       "permanent": false,
       "id": 19
+=======
+      "name": "shiv",
+      "email": "shiv@gmail.com",
+      "mobile": "787878876",
+      "gender": "male",
+      "address": [
+        {
+          "city": "eeesss",
+          "zip": 22222
+        }
+      ],
+      "department": "Software Engineer",
+      "hiredate": "2020-02-28",
+      "permanent": false,
+      "id": 14
+    },
+    {
+      "name": "sssss",
+      "email": "ssss@ss",
+      "mobile": "dddd",
+      "gender": "male",
+      "address": [
+        {
+          "city": "dddd",
+          "zip": "ddd"
+        },
+        {
+          "city": "ddddsss",
+          "zip": "ddddsss"
+        }
+      ],
+      "department": "Software Engineer",
+      "hiredate": "2020-02-19",
+      "permanent": true,
+      "id": 15
     }
   ]
 }
