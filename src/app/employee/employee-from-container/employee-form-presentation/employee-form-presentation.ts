@@ -19,11 +19,11 @@ export class EmployeeFormPresentation implements OnInit, OnDestroy {
     if (value) {
       this.employeeData = value;
       if (this.employeeData) {
-            for (let i = 1; i < this.employeeData.address.length; i++) {
-              this.employeeFormPresenter.addNewAddress(this.employeeForm);
-            }
-            this.employeeForm.patchValue(this.employeeData);
-          }
+        for (let i = 1; i < this.employeeData.address.length; i++) {
+          this.employeeFormPresenter.addNewAddress(this.employeeForm);
+        }
+        this.employeeForm.patchValue(this.employeeData);
+      }
     }
   }
   get employee(): Employee {
@@ -33,12 +33,12 @@ export class EmployeeFormPresentation implements OnInit, OnDestroy {
   /**
    * Create event for update data
    */
-  @Output() updateEmployeeEvent = new EventEmitter<Employee>();
+  @Output() updateEmployee = new EventEmitter;
 
   /**
    * Create event for Add new Employee
    */
-  @Output() addEmployeeEvent = new EventEmitter<Employee>();
+  @Output() addEmployee = new EventEmitter;
 
   public employeeData: Employee;
 
@@ -48,6 +48,8 @@ export class EmployeeFormPresentation implements OnInit, OnDestroy {
   constructor(
     private employeeFormPresenter: EmployeeFormPresenter,
   ) {
+    this.updateEmployee = new EventEmitter<Employee>();
+    this.addEmployee = new EventEmitter<Employee>();
   }
 
   ngOnInit(): void {
@@ -79,9 +81,9 @@ export class EmployeeFormPresentation implements OnInit, OnDestroy {
    */
   public onSubmit(): void {
     if (this.employee) {
-      this.updateEmployeeEvent.emit(this.employeeForm.value);
+      this.updateEmployee.emit(this.employeeForm.value);
     } else {
-      this.addEmployeeEvent.emit(this.employeeForm.value);
+      this.addEmployee.emit(this.employeeForm.value);
     }
   }
 

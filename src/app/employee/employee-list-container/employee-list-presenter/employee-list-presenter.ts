@@ -14,7 +14,7 @@ export class EmployeeListPresenter {
 
   constructor() {
     this.order = 'name';
-    this.reverse = false;
+    this.reverse = true;
     this.setNewOrder = 'asc';
   }
 
