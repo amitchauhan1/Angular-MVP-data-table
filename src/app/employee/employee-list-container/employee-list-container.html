@@ -1,8 +1,7 @@
 <app-emp-list-ui
             [employees]="employees$ | async"
-            (deleteEmpEvent)="deleteEmployee($event)"
-            (editEmpEvent)="editEmployee($event)"
-            (searchQueryEvent)="search($event)"
-            (sortFieldEvent)="sort($event)"
-            (sortOrderEvent)="sortOrder($event)"
+            (delete)="deleteEmployee($event)"
+            (edit)="editEmployee($event)"
+            (searchData)="search($event)"
+            (sortField)="sort($event)"
             ></app-emp-list-ui>

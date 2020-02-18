@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output, DoCheck } from '@angular/core';
 
 import { EmployeeListPresenter } from '../employee-list-presenter/employee-list-presenter';
-import { Employee } from '../../employee-model';
+import { Employee, Sort } from '../../employee-model';
 
 @Component({
   selector: 'app-emp-list-ui',
@@ -18,27 +18,22 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
   /**
    * Create Event for send emit employee id for delete
    */
-  @Output() deleteEmpEvent = new EventEmitter<number>();
+  @Output() delete: EventEmitter<number>;
 
   /**
    * Create Event for send emit employee id for edit
    */
-  @Output() editEmpEvent = new EventEmitter<number>();
+  @Output() edit: EventEmitter<number>;
 
   /**
    * create new event for search.
    */
-  @Output() searchQueryEvent = new EventEmitter<string>();
+  @Output() searchData: EventEmitter<string>;
 
   /**
    * create new event for sort send data.
    */
-  @Output() sortFieldEvent = new EventEmitter<string>();
-
-  /**
-   * create new event for sort send order.
-   */
-  @Output() sortOrderEvent = new EventEmitter<string>();
+  @Output() sortField: EventEmitter<Sort>;
 
   // For search text box
   public searchQuery: string;
@@ -50,22 +45,31 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
   public order: string;
   // set order
   public reverse: boolean;
+  // Object of search
+  private queryData: Sort;
 
   constructor(
     private employeeListPresenter: EmployeeListPresenter
   ) {
+    this.edit = new EventEmitter<number>();
+    this.delete = new EventEmitter<number>();
+    this.searchData = new EventEmitter<string>();
+    this.sortField = new EventEmitter<Sort>();
+
     this.query = '';
     this.field = 'name';
     this.order = 'asc';
+    this.queryData = {
+      field: this.field,
+      order: this.order
+    }
   }
 
   ngOnInit(): void {
     // Default init time send value of search query
-    this.searchQueryEvent.emit(this.query);
+    this.searchData.emit(this.query);
     // Default init time set name of field
-    this.sortFieldEvent.emit(this.field);
-    // Default init time set order ascending
-    this.sortOrderEvent.emit(this.employeeListPresenter.changeOrder());
+    this.sortField.emit(this.queryData);
   }
 
   ngDoCheck(): void {
@@ -78,7 +82,7 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
    * @param id Employee Id for delete
    */
   public deleteEmployee(id: number): void {
-    this.deleteEmpEvent.emit(id);
+    this.delete.emit(id);
   }
 
   /**
@@ -86,28 +90,30 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
    * @param id Employee Id for edit
    */
   public editEmployee(id: number): void {
-    this.editEmpEvent.emit(id);
+    this.edit.emit(id);
   }
 
   /**
    * search for emit event
    */
   public search(): void {
-    this.searchQueryEvent.emit(this.searchQuery);
+    this.searchData.emit(this.searchQuery);
   }
 
   /**
    * set order for sorting
-   * @param value Field name
+   * @param fieldName Field name
    */
-  public setOrder(value: string): void {
+  public setOrder(fieldName: string): void {
     // Call sorting Method
-    this.employeeListPresenter.setOrder(value);
+    this.employeeListPresenter.setOrder(fieldName);
 
+    // Create object for sort data
+    this.queryData = {
+      field: fieldName,
+      order: this.employeeListPresenter.changeOrder()
+    }
     // Emit Sort value
-    this.sortFieldEvent.emit(value);
-
-    // Emit Set new order
-    this.sortOrderEvent.emit(this.employeeListPresenter.changeOrder());
+    this.sortField.emit(this.queryData);
   }
 }

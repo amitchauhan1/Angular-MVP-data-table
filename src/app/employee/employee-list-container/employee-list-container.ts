@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { Employee } from '../employee-model';
+import { Employee, Sort } from '../employee-model';
 import { EmployeeService } from '../employee-service/employee.service';
 import { EmployeeListPresenter } from './employee-list-presenter/employee-list-presenter';
 
@@ -21,6 +21,7 @@ export class EmployeeListContainer implements OnInit {
   private query: string;
 
   // sort default value
+  private queryData: object;
   private field: string;
   private order: string;
 
@@ -71,16 +72,10 @@ export class EmployeeListContainer implements OnInit {
    * Sorting Fields wise
    * @param field set new field for sorting
    */
-  public sort(field: string): void {
-    this.employees$ = this.api.getEmployees(field, this.order, this.query);
-    this.field = field;
+  public sort(queryData: Sort): void {
+    this.field = queryData.field;
+    this.order = queryData.order;
+    this.employees$ = this.api.getEmployees(this.field, this.order, this.query);
   }
 
-  /**
-   * New Order field wise.
-   * @param order New Order 'asc', 'desc'
-   */
-  public sortOrder(order: string): void {
-    this.order = order;
-  }
 }
