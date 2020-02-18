@@ -33,12 +33,12 @@ export class EmployeeFormPresentation implements OnInit, OnDestroy {
   /**
    * Create event for update data
    */
-  @Output() updateEmployee = new EventEmitter;
+  @Output() updateEmployee: EventEmitter<Employee>;
 
   /**
    * Create event for Add new Employee
    */
-  @Output() addEmployee = new EventEmitter;
+  @Output() addEmployee: EventEmitter<Employee>;
 
   public employeeData: Employee;
 

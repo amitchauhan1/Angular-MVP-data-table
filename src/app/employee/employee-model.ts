@@ -9,7 +9,13 @@ export class Employee {
     hiredate: Date;
     permanent: boolean;
 }
-class Address {
+export class Address {
     city: string;
     zip: number;
 }
+
+export class Sort {
+    field: string;
+    order: string;
+}
+

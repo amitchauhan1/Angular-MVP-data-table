@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output, DoCheck } from '@angular/core';
 
 import { EmployeeListPresenter } from '../employee-list-presenter/employee-list-presenter';
-import { Employee } from '../../employee-model';
+import { Employee, Sort } from '../../employee-model';
 
 @Component({
   selector: 'app-emp-list-ui',
@@ -18,22 +18,22 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
   /**
    * Create Event for send emit employee id for delete
    */
-  @Output() delete = new EventEmitter;
+  @Output() delete: EventEmitter<number>;
 
   /**
    * Create Event for send emit employee id for edit
    */
-  @Output() edit = new EventEmitter;
+  @Output() edit: EventEmitter<number>;
 
   /**
    * create new event for search.
    */
-  @Output() searchData = new EventEmitter;
+  @Output() searchData: EventEmitter<string>;
 
   /**
    * create new event for sort send data.
    */
-  @Output() sortField = new EventEmitter;
+  @Output() sortField: EventEmitter<Sort>;
 
   // For search text box
   public searchQuery: string;
@@ -46,7 +46,7 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
   // set order
   public reverse: boolean;
   // Object of search
-  private queryData: object;
+  private queryData: Sort;
 
   constructor(
     private employeeListPresenter: EmployeeListPresenter
@@ -54,13 +54,13 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
     this.edit = new EventEmitter<number>();
     this.delete = new EventEmitter<number>();
     this.searchData = new EventEmitter<string>();
-    this.sortField = new EventEmitter<string>();
+    this.sortField = new EventEmitter<Sort>();
 
     this.query = '';
     this.field = 'name';
     this.order = 'asc';
     this.queryData = {
-      query: this.field,
+      field: this.field,
       order: this.order
     }
   }
@@ -110,7 +110,7 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
 
     // Create object for sort data
     this.queryData = {
-      query: fieldName,
+      field: fieldName,
       order: this.employeeListPresenter.changeOrder()
     }
     // Emit Sort value

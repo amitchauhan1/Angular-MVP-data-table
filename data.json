@@ -63,22 +63,7 @@
       "department": "Accountant",
       "hiredate": "2020-02-04",
       "permanent": false,
-      "id": 19
-=======
-      "name": "shiv",
-      "email": "shiv@gmail.com",
-      "mobile": "787878876",
-      "gender": "male",
-      "address": [
-        {
-          "city": "eeesss",
-          "zip": 22222
-        }
-      ],
-      "department": "Software Engineer",
-      "hiredate": "2020-02-28",
-      "permanent": false,
-      "id": 14
+      "id":14
     },
     {
       "name": "sssss",
