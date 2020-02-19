@@ -8,7 +8,7 @@ import { PipePresenter } from '../pipe-presenter/pipe-presenter';
   viewProviders: [PipePresenter]
 })
 export class PipePresentation implements OnInit {
-
+  clickEmoji = 'happy';
   constructor() { }
 
   ngOnInit() {

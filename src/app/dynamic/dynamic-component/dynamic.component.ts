@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, OnDestroy, ComponentRef } from '@angular/core';
 import { DirectiveContainer } from '../directive-container/directive-container';
 import { PipeContainer } from '../pipe-container/pipe-container';
-import { DialogService } from '../dialog/dialog.service';
+import { OverlayConfig, Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-dynamic',
@@ -12,13 +13,15 @@ export class DynamicComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('directive', { read: ViewContainerRef, static: false }) entryDirective: ViewContainerRef;
-  @ViewChild('pipe', { read: ViewContainerRef, static: false }) entryPipe: ViewContainerRef;
 
-  componentRef: ComponentRef<any>;
+  componentRef: ComponentRef<DirectiveContainer>;
+  portelRef: ComponentPortal<PipeContainer>;
+
+  isMenuOpen: boolean = false;
 
   constructor(
     private resolver: ComponentFactoryResolver,
-    private dialogService: DialogService,
+    private overlay: Overlay,
     ) { }
 
   createComponentDirective() {
@@ -28,15 +31,28 @@ export class DynamicComponent implements OnInit, OnDestroy {
   }
 
   createComponentPipe() {
-    this.entryPipe.clear();
-    const factory = this.resolver.resolveComponentFactory(PipeContainer);
-    this.componentRef = this.entryPipe.createComponent(factory);
+    this.entryDirective.clear();
+    this.portelRef = new ComponentPortal(PipeContainer);
   }
 
   openDialog(): void {
-    this.dialogService.open(
-      PipeContainer
-    );
+    const config = new OverlayConfig();
+
+    config.positionStrategy = this.overlay.position()
+        .global()
+        .centerVertically()
+        .centerHorizontally();
+
+    // this.nextPosition += 30;
+
+    config.hasBackdrop = true;
+
+    const overlayRef = this.overlay.create(config);
+    overlayRef.attach(new ComponentPortal(DirectiveContainer));
+
+    overlayRef.backdropClick().subscribe(() => {
+      overlayRef.dispose();
+    });
   }
 
   ngOnInit() {

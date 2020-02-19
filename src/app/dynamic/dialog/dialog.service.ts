@@ -1,21 +1,33 @@
 import { Injectable, Type } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
 @Injectable()
 export class DialogService {
 
-  constructor( private overlay: Overlay) { }
+  nextPosition: number = 20;
+  isMenuOpen: boolean = false;
+  constructor( 
+    private overlay: Overlay,
+    ) { }
 
   open(component: Type<any>): void {
-    this.overlay
-      .create({
-        disposeOnNavigation: true,
-        positionStrategy: this.overlay.position()
-          .global()
-          .left(`50%`)
-        .top(`33px`)
-      })
-      .attach(new ComponentPortal(component));
+    const config = new OverlayConfig();
+
+    config.positionStrategy = this.overlay.position()
+        .global()
+        .left(`${this.nextPosition}px`)
+        .top(`${this.nextPosition}px`);
+
+    // this.nextPosition += 30;
+
+    config.hasBackdrop = true;
+
+    const overlayRef = this.overlay.create(config);
+    overlayRef.attach(new ComponentPortal(component));
+
+    overlayRef.backdropClick().subscribe(() => {
+      overlayRef.dispose();
+    });
   }
 }
