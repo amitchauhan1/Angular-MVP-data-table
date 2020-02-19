@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PipePresenter } from '../pipe-presenter/pipe-presenter';
 
+/**
+ * @author Amit Chauhan
+ */
 @Component({
   selector: 'app-pipe-ui',
   templateUrl: './pipe-presentation.html',
@@ -8,8 +11,12 @@ import { PipePresenter } from '../pipe-presenter/pipe-presenter';
   viewProviders: [PipePresenter]
 })
 export class PipePresentation implements OnInit {
-  clickEmoji = 'happy';
-  constructor() { }
+
+  public clickEmoji: string;
+
+  constructor() {
+    this.clickEmoji = 'happy';
+  }
 
   ngOnInit() {
   }

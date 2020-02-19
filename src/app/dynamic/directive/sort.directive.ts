@@ -1,6 +1,9 @@
 import { Directive, Output, HostListener, ElementRef } from '@angular/core';
 import { EventEmitter } from 'events';
 
+/**
+ * @author Amit Chauhan
+ */
 @Directive({
   selector: '[appSort]'
 })

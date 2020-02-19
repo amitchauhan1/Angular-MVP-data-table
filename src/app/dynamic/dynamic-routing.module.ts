@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { DynamicComponent } from './dynamic-component/dynamic.component';
 
 const routes: Routes = [

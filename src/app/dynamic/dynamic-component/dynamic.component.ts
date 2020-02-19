@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, OnDestroy, ComponentRef } from '@angular/core';
-import { DirectiveContainer } from '../directive-container/directive-container';
-import { PipeContainer } from '../pipe-container/pipe-container';
 import { OverlayConfig, Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
+import { DirectiveContainer } from '../directive-container/directive-container';
+import { PipeContainer } from '../pipe-container/pipe-container';
+
+/**
+ * @author Amit Chauhan
+ */
 @Component({
   selector: 'app-dynamic',
   templateUrl: './dynamic.component.html',
@@ -11,42 +15,41 @@ import { ComponentPortal } from '@angular/cdk/portal';
 })
 export class DynamicComponent implements OnInit, OnDestroy {
 
-
   @ViewChild('directive', { read: ViewContainerRef, static: false }) entryDirective: ViewContainerRef;
 
-  componentRef: ComponentRef<DirectiveContainer>;
-  portelRef: ComponentPortal<PipeContainer>;
+  private componentRef: ComponentRef<DirectiveContainer>;
+  public portelRef: ComponentPortal<PipeContainer>;
 
-  isMenuOpen: boolean = false;
+  public isMenuOpen: boolean;
 
   constructor(
     private resolver: ComponentFactoryResolver,
     private overlay: Overlay,
-    ) { }
+  ) {
+    this.isMenuOpen = false;
+  }
+  ngOnInit(): void {
+  }
 
-  createComponentDirective() {
+  public createComponentDirective(): void {
     this.entryDirective.clear();
     const factory = this.resolver.resolveComponentFactory(DirectiveContainer);
     this.componentRef = this.entryDirective.createComponent(factory);
   }
 
-  createComponentPipe() {
+  public createComponentPipe(): void {
     this.entryDirective.clear();
     this.portelRef = new ComponentPortal(PipeContainer);
   }
 
-  openDialog(): void {
+  public openDialog(): void {
     const config = new OverlayConfig();
-
     config.positionStrategy = this.overlay.position()
-        .global()
-        .centerVertically()
-        .centerHorizontally();
-
+      .global()
+      .centerVertically()
+      .centerHorizontally();
     // this.nextPosition += 30;
-
     config.hasBackdrop = true;
-
     const overlayRef = this.overlay.create(config);
     overlayRef.attach(new ComponentPortal(DirectiveContainer));
 
@@ -55,8 +58,6 @@ export class DynamicComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-  }
   ngOnDestroy() {
     if (this.componentRef) {
       this.componentRef.destroy();

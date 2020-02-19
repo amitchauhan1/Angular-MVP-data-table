@@ -1,20 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { DirectivePresenter } from '../directive-presenter/directive-presenter';
 
+/**
+ * @author Amit Chauhan
+ */
 @Component({
   selector: 'app-directive-ui',
   templateUrl: './directive-presentation.html',
-  styleUrls: ['./directive-presentation.scss'],
   viewProviders: [DirectivePresenter]
 })
 export class DirectivePresentation implements OnInit {
-  fieldName;
-  tableHeader = ['name', 'email', 'mobile', 'address', 'gender', 'department', 'hiredate', 'parmanent'];
-  constructor() { }
+  public fieldName: string;
+  public tableHeader: object;
+  constructor() {
+    this.tableHeader = ['name', 'email', 'mobile', 'address', 'gender', 'department', 'hiredate', 'parmanent'];
+  }
 
   ngOnInit() {
   }
-  getField(field){
+
+  public getField(field: string): void {
     this.fieldName = field;
   }
 
