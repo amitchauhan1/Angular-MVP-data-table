@@ -55,7 +55,11 @@ export class EmployeeService {
    * @param empData Employee updated data
    */
   updateEmployee(empId: number, empData: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.baseUrl}Employee/${empId}`, empData);
+    return this.http.put<Employee>(`${this.baseUrl}Employee/${empId}`, empData).pipe(
+      response => {
+        return response;
+      }
+    );
   }
 
   /**

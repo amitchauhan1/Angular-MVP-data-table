@@ -51,7 +51,8 @@ export class EmployeeFormContainer implements OnInit {
 
   // Update employee data.
   public updateEmployee(employeeData: Employee): void {
-    this.api.updateEmployee(Number(this.employeeId), employeeData).subscribe(() => {
+    this.api.updateEmployee(Number(this.employeeId), employeeData).subscribe((data) => {
+      console.log(data);
       alert('Update Employee data successfully');
       this.location.back();
     });
