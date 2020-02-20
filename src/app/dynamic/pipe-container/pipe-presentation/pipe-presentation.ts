@@ -11,8 +11,9 @@ import { PipePresenter } from '../pipe-presenter/pipe-presenter';
   viewProviders: [PipePresenter]
 })
 export class PipePresentation implements OnInit {
-
+  public plular: string;
   public clickEmoji: string;
+  public clickplular: string;
 
   constructor() {
     this.clickEmoji = 'happy';

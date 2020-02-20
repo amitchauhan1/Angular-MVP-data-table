@@ -14,6 +14,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { SortDirective } from './directive/sort.directive';
 import { EmojiPipe } from './pipe/emoji.pipe';
 import { FormsModule } from '@angular/forms';
+import { PluralPipe } from './pipe/plural.pipe';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     DirectivePresentation,
     PipePresentation,
     SortDirective,
-    EmojiPipe
+    EmojiPipe,
+    PluralPipe
   ],
   imports: [
     CommonModule,

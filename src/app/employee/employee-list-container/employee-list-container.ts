@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { Employee, Sort } from '../employee-model';
-import { EmployeeService } from '../employee-service/employee.service';
 import { EmployeeListPresenter } from './employee-list-presenter/employee-list-presenter';
-
+import { EmployeeService } from '../employee-service/employee.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-emp-list-container',
@@ -21,7 +20,6 @@ export class EmployeeListContainer implements OnInit {
   private query: string;
 
   // sort default value
-  private queryData: object;
   private field: string;
   private order: string;
 
@@ -56,7 +54,7 @@ export class EmployeeListContainer implements OnInit {
    * @param id In this event in come id for edit employee record.
    */
   public editEmployee(id: number): void {
-    this.router.navigate([`employee-edit/${id}`]);
+    this.router.navigate([`employee/edit/${id}`]);
   }
 
   /**

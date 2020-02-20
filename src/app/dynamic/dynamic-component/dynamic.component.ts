@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, OnDestroy, ComponentRef } from '@angular/core';
-import { OverlayConfig, Overlay } from '@angular/cdk/overlay';
+import { Component, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 
 import { DirectiveContainer } from '../directive-container/directive-container';
 import { PipeContainer } from '../pipe-container/pipe-container';
@@ -43,6 +43,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
   }
 
   public openDialog(): void {
+    this.entryDirective.clear();
     const config = new OverlayConfig();
     config.positionStrategy = this.overlay.position()
       .global()
@@ -51,7 +52,7 @@ export class DynamicComponent implements OnInit, OnDestroy {
     // this.nextPosition += 30;
     config.hasBackdrop = true;
     const overlayRef = this.overlay.create(config);
-    overlayRef.attach(new ComponentPortal(DirectiveContainer));
+    overlayRef.attach(new ComponentPortal(PipeContainer));
 
     overlayRef.backdropClick().subscribe(() => {
       overlayRef.dispose();

@@ -1,10 +1,10 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 
 import { Employee } from '../employee-model';
 import { EmployeeService } from '../employee-service/employee.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee-container',
@@ -20,7 +20,7 @@ export class EmployeeFormContainer implements OnInit {
   private employeeId: string;
 
   constructor(
-    private api: EmployeeService,
+    private employeeService: EmployeeService,
     private location: Location,
     private route: ActivatedRoute,
   ) {
@@ -34,16 +34,16 @@ export class EmployeeFormContainer implements OnInit {
      * Get single employee record for edit record
      */
     if (this.employeeId) {
-      this.employee$ = this.api.getEmployee(Number(this.employeeId));
+      this.employee$ = this.employeeService.getEmployee(Number(this.employeeId));
     }
 
     // Get Department for using in drop down box
-    this.department$ = this.api.getDepartment();
+    this.department$ = this.employeeService.getDepartment();
   }
 
   // Add new employee.
   public addEmployee(employeeData: Employee): void {
-    this.api.addEmployee(employeeData).subscribe(() => {
+    this.employeeService.addEmployee(employeeData).subscribe(() => {
       alert('Add Employee successfully');
       this.location.back();
     });
@@ -51,7 +51,7 @@ export class EmployeeFormContainer implements OnInit {
 
   // Update employee data.
   public updateEmployee(employeeData: Employee): void {
-    this.api.updateEmployee(Number(this.employeeId), employeeData).subscribe(() => {
+    this.employeeService.updateEmployee(Number(this.employeeId), employeeData).subscribe(() => {
       alert('Update Employee data successfully');
       this.location.back();
     });
