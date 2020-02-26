@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, EventEmitter, Output, DoCheck } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { EmployeeListPresenter } from '../employee-list-presenter/employee-list-presenter';
 import { Employee, Sort } from '../../employee-model';
+import { EmployeeListPresenter } from '../employee-list-presenter/employee-list-presenter';
 
 @Component({
   selector: 'app-emp-list-ui',
@@ -62,7 +62,7 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
     this.queryData = {
       field: this.field,
       order: this.order
-    }
+    };
   }
 
   ngOnInit(): void {
@@ -112,7 +112,7 @@ export class EmployeeListPresentation implements OnInit, DoCheck {
     this.queryData = {
       field: fieldName,
       order: this.employeeListPresenter.changeOrder()
-    }
+    };
     // Emit Sort value
     this.sortField.emit(this.queryData);
   }

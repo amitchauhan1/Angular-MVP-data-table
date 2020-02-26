@@ -1,24 +1,25 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { EmployeeListContainer } from './employee-list-container/employee-list-container';
+import { RouterModule, Routes } from '@angular/router';
+
 import { EmployeeFormContainer } from './employee-from-container/employee-form-container';
+import { EmployeeListContainer } from './employee-list-container/employee-list-container';
 
 const routes: Routes = [
   {
-    path: 'employee-list',
+    path: 'list',
     component: EmployeeListContainer
   },
   {
-    path: 'employee-add',
+    path: 'add',
     component: EmployeeFormContainer
   },
   {
-    path: 'employee-edit/:id',
+    path: 'edit/:id',
     component: EmployeeFormContainer
   },
   {
     path: '',
-    redirectTo: 'employee-list',
+    redirectTo: 'list',
     pathMatch: 'full'
   }
 ];

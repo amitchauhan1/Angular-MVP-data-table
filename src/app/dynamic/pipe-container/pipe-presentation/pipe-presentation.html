@@ -1,5 +1,30 @@
 <body>
     <div>
+        <ul *ngIf="!clickplular">
+            <div>
+                <li>
+                    <input checked type="radio" name="1" value="plular" [(ngModel)]="clickplular">
+                    <label>Check Plural!</label>
+                    <div class="bullet">
+                        <div class="line zero"></div>
+                        <div class="line one"></div>
+                        <div class="line two"></div>
+                        <div class="line three"></div>
+                        <div class="line four"></div>
+                        <div class="line five"></div>
+                        <div class="line six"></div>
+                        <div class="line seven"></div>
+                    </div>
+                </li>
+            </div>
+        </ul>
+        <div *ngIf="clickplular">
+            <h1>Check Plular</h1>
+            <h4>I hope you enjoyed it</h4>
+            <input type="text" [(ngModel)]="plular" placeholder="One/Two/..." class="text"/>
+        </div>
+    </div>
+    <div *ngIf="!clickplular">
         <h1>SELECT EMOJI</h1>
         <h4>I hope you enjoyed it</h4>
         <ul>
@@ -78,9 +103,10 @@
                     </div>
                 </li>
             </div>
-
         </ul>
     </div>
 
 </body>
-<h1 class="h1">{{clickEmoji | emoji}}</h1>
+<h1 *ngIf="!clickplular" class="h1">{{clickEmoji | emoji}}</h1>
+
+<h1 *ngIf="clickplular">{{plular | plural}}</h1>

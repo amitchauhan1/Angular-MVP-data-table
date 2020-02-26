@@ -19,7 +19,7 @@ export class EmployeeListPresenter {
   }
 
   // Change Order on click
-  changeOrder(): string {
+  public changeOrder(): string {
     // If Reverse true set 'asc' otherwise set 'desc'.
     if (this.reverse === true) {
       return this.setNewOrder = 'asc';
