@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { Employee } from '../employee-model';
+import { Employee } from '../model/employee-model';
 import { EmployeeService } from '../employee-service/employee.service';
 import { Observable } from 'rxjs';
 

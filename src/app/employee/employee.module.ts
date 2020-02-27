@@ -9,7 +9,8 @@ import { EmployeeListContainer } from './employee-list-container/employee-list-c
 import { EmployeeListPresentation } from './employee-list-container/employee-list-presentation/employee-list-presentation';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeService } from './employee-service/employee.service';
-import { EmployeeAdapter } from './employee-model';
+import { Adapter } from './adpater/employee-adapter';
+import { HttpAdapter } from './adpater/http-employee-adapter';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { EmployeeAdapter } from './employee-model';
     FormsModule,
     HttpClientModule
   ],
-  providers: [EmployeeService, EmployeeAdapter],
+  providers: [EmployeeService, Adapter, HttpAdapter],
 
 })
 export class EmployeeModule { }

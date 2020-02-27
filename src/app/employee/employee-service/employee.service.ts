@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Employee, EmployeeAdapter } from '../employee-model';
+import { Employee } from '../model/employee-model';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Adapter } from '../adpater/employee-adapter';
+import { HttpAdapter } from '../adpater/http-employee-adapter';
 
 // Use for Url
 const BASEURL = environment.API;
@@ -14,7 +16,8 @@ export class EmployeeService {
 
   constructor(
     private http: HttpClient,
-    private adapter: EmployeeAdapter
+    private adapter: Adapter,
+    private httpAdapter: HttpAdapter
   ) {
   }
 
@@ -26,7 +29,7 @@ export class EmployeeService {
    */
   getEmployees(field: string, order: string, query: string): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${BASEURL}Employee?_sort=${field}&_order=${order}&q=${query}`).pipe(
-      map((data: any[]) => data.map(employee => this.adapter.adapt(employee))));
+      map((data: any[]) => data.map(employee => this.adapter.getAdapt(employee))));
   }
 
   /**
@@ -35,7 +38,7 @@ export class EmployeeService {
    */
   getEmployee(employeeId: number): Observable<Employee> {
     return this.http.get<Employee>(`${BASEURL}Employee/${employeeId}`).pipe(
-      map(employee => this.adapter.adapt(employee)));
+      map(employee => this.adapter.getAdapt(employee)));
   }
 
   /**
@@ -50,7 +53,7 @@ export class EmployeeService {
    */
   addEmployee(employeeData: Employee): Observable<Employee> {
     return this.http.post<Employee>(`${BASEURL}Employee`, employeeData).pipe(
-      map((data: any) => data.map(employee => this.adapter.adapt(employee))));
+      map((data: any) => data.map(employee => this.httpAdapter.setAdapt(employee))));
   }
 
   /**
@@ -60,7 +63,7 @@ export class EmployeeService {
    */
   updateEmployee(employeeId: number, employeeData: Employee): Observable<Employee> {
     return this.http.put<Employee>(`${BASEURL}Employee/${employeeId}`, employeeData).pipe(
-      map(employee => this.adapter.adapt(employee)));
+      map(employee => this.httpAdapter.setAdapt(employee)));
   }
 
   /**

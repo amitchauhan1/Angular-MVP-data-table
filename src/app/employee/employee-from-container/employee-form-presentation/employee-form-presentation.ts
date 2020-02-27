@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 
-import { Employee } from 'src/app/employee/employee-model';
+import { Employee } from 'src/app/employee/model/employee-model';
 import { EmployeeFormPresenter } from '../employee-form-presenter/employee-form-presenter';
 /**
  * @author Amit Chauhan

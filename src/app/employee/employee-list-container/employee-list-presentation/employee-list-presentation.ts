@@ -1,6 +1,6 @@
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Employee, Sort } from '../../employee-model';
+import { Employee, Sort } from '../../model/employee-model';
 import { EmployeeListPresenter } from '../employee-list-presenter/employee-list-presenter';
 
 @Component({
