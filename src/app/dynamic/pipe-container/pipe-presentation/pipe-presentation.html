@@ -1,0 +1,86 @@
+<body>
+    <div>
+        <h1>SELET EMOJI</h1>
+        <h4>I hope you enjoyed it</h4>
+        <ul>
+            <div class="left">
+                <li>
+                    <input checked type="radio" name="1" value="happy" [(ngModel)]="clickEmoji">
+                    <label>Happy!</label>
+                    <div class="bullet">
+                        <div class="line zero"></div>
+                        <div class="line one"></div>
+                        <div class="line two"></div>
+                        <div class="line three"></div>
+                        <div class="line four"></div>
+                        <div class="line five"></div>
+                        <div class="line six"></div>
+                        <div class="line seven"></div>
+                    </div>
+                </li>
+
+                <li>
+                    <input type="radio" name="1" value="sad" [(ngModel)]="clickEmoji">
+                    <label>Sad!</label>
+                    <div class="bullet">
+                        <div class="line zero"></div>
+                        <div class="line one"></div>
+                        <div class="line two"></div>
+                        <div class="line three"></div>
+                        <div class="line four"></div>
+                        <div class="line five"></div>
+                        <div class="line six"></div>
+                        <div class="line seven"></div>
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" name="1" value="enjoy" [(ngModel)]="clickEmoji">
+                    <label>Enjoy</label>
+                    <div class="bullet">
+                        <div class="line zero"></div>
+                        <div class="line one"></div>
+                        <div class="line two"></div>
+                        <div class="line three"></div>
+                        <div class="line four"></div>
+                        <div class="line five"></div>
+                        <div class="line six"></div>
+                        <div class="line seven"></div>
+                    </div>
+                </li>
+            </div>
+            <div class="right">
+                <li>
+                    <input type="radio" name="1" value="selfie" [(ngModel)]="clickEmoji">
+                    <label>Selfie</label>
+                    <div class="bullet">
+                        <div class="line zero"></div>
+                        <div class="line one"></div>
+                        <div class="line two"></div>
+                        <div class="line three"></div>
+                        <div class="line four"></div>
+                        <div class="line five"></div>
+                        <div class="line six"></div>
+                        <div class="line seven"></div>
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" name="1" value="angry" [(ngModel)]="clickEmoji">
+                    <label>Angry</label>
+                    <div class="bullet">
+                        <div class="line zero"></div>
+                        <div class="line one"></div>
+                        <div class="line two"></div>
+                        <div class="line three"></div>
+                        <div class="line four"></div>
+                        <div class="line five"></div>
+                        <div class="line six"></div>
+                        <div class="line seven"></div>
+                    </div>
+                </li>
+            </div>
+
+        </ul>
+    </div>
+
+</body>
+<h1 class="h1">{{clickEmoji | emoji}}</h1>

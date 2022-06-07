@@ -1,0 +1,56 @@
+<button routerLink='/employee-add' class="fa fa-plus add">Add Employee</button>
+<div class="container" style="display: block; margin: 0px;  width: 0px; height: 20px; padding: 0px; float: left;">
+  <input type="text" [(ngModel)]="searchQuery" (keyup)="search()" placeholder="Search...">
+  <div class="search"></div>
+</div>
+<br><br>
+<table class="form-style-9">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" [class.active]="order === 'name'" (click)="setOrder('name')">
+        Full_Name<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
+      </th>
+      <th scope="col" [class.active]="order === 'email'" (click)="setOrder('email')">
+        Email<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
+      </th>
+      <th scope="col" [class.active]="order === 'mobile'" (click)="setOrder('mobile')">
+        Mobile<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
+      </th>
+      <th scope="col" [class.active]="order === 'address'" (click)="setOrder('address')">
+        Address<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
+      </th>
+      <th scope="col" [class.active]="order === 'gender'" (click)="setOrder('gender')">
+        Gender<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
+      </th>
+      <th scope="col" [class.active]="order === 'department'" (click)="setOrder('department')">
+        Depaerment<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
+      </th>
+      <th scope="col" [class.active]="order === 'hiredate'" (click)="setOrder('hiredate')">
+        Hire_date<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
+      </th>
+      <th scope="col" [class.active]="order === 'permanent'" (click)="setOrder('permanent')">
+        Permanent<span *ngIf="reverse">▼</span><span *ngIf="!reverse">▲</span>
+      </th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emp of employees">
+      <td>{{emp.name}}</td>
+      <td>{{emp.email}}</td>
+      <td>{{emp.mobile}}</td>
+      <td>
+        <span *ngFor="let add of emp.address">
+          {{add.city}},{{add.zip}}
+        </span>
+      </td>
+      <td>{{emp.gender}}</td>
+      <td>{{emp.department}}</td>
+      <td>{{emp.hiredate}}</td>
+      <td>{{emp.permanent}}</td>
+      <td><span (click)="editEmployee(emp.id)" router class="fa fa-edit pointer"></span></td>
+      <td><span (click)="deleteEmployee(emp.id)" class="fa fa-trash pointer"></span></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,8 @@
+<h1>Dynamic Task</h1>
+<button (click)="createComponentDirective()" class="fa fa-plus">Directive<br>(Factory)</button>
+<button (click)="createComponentPipe()" class="fa fa-plus">Pipe<br>(Portal)</button>
+<button (click)="openDialog()" class="fa fa-plus">Open dialog<br>(Overlay)</button>
+
+<template #directive [cdkPortalOutlet]="portelRef">
+
+</template>

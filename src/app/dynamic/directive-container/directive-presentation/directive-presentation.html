@@ -1,0 +1,28 @@
+<table class="form-style-9">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" *ngFor="let field of tableHeader" (click)="getField(field)">
+                {{field}}<i class="fa fa-edit" appSort></i>
+            </th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Amit</td>
+            <td>amit@gmail.com</td>
+            <td>546247896</td>
+            <td>
+                Valsad,396001
+            </td>
+            <td>male</td>
+            <td>Account</td>
+            <td>15-01-19</td>
+            <td>true</td>
+            <td><span class="fa fa-edit pointer"></span></td>
+            <td><span class="fa fa-trash pointer"></span></td>
+          </tr>
+        </tbody>
+      </table>
+      {{fieldName}}

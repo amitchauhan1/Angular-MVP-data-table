@@ -1,0 +1,6 @@
+<app-employee-form-ui
+              [department]="department$ | async"
+              [employee]="employee$ | async"
+              (addEmployee)="addEmployee($event)"
+              (updateEmployee)="updateEmployee($event)"
+            ></app-employee-form-ui>

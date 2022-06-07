@@ -1,0 +1,89 @@
+{
+  "department": [
+    "Devloper",
+    "Software Engineer",
+    "Accountant"
+  ],
+  "Employee": [
+    {
+      "name": "sssss",
+      "email": "ssss@ss",
+      "mobile": "1212121212",
+      "gender": "male",
+      "address": [
+        {
+          "city": "dddd",
+          "zip": "ddd"
+        },
+        {
+          "city": "dddd",
+          "zip": "dddd"
+        }
+      ],
+      "department": "Software Engineer",
+      "hiredate": "2020-02-19",
+      "permanent": true,
+      "id": 11
+    },
+    {
+      "name": "shiv",
+      "email": "shiv@gmail.com",
+      "mobile": "787878876",
+      "gender": "male",
+      "address": [
+        {
+          "city": "eeesss",
+          "zip": 22222
+        },
+        {
+          "city": "ssss",
+          "zip": "ssss"
+        }
+      ],
+      "department": "Software Engineer",
+      "hiredate": "2020-02-28",
+      "permanent": false,
+      "id": 13
+    },
+    {
+      "name": "bhargav",
+      "email": "balu@gmail.com",
+      "mobile": "8288838111",
+      "gender": "male",
+      "address": [
+        {
+          "city": "valsad",
+          "zip": 396001
+        },
+        {
+          "city": "surat",
+          "zip": "396044"
+        }
+      ],
+      "department": "Accountant",
+      "hiredate": "2020-02-04",
+      "permanent": false,
+      "id":14
+    },
+    {
+      "name": "sssss",
+      "email": "ssss@ss",
+      "mobile": "dddd",
+      "gender": "male",
+      "address": [
+        {
+          "city": "dddd",
+          "zip": "ddd"
+        },
+        {
+          "city": "ddddsss",
+          "zip": "ddddsss"
+        }
+      ],
+      "department": "Software Engineer",
+      "hiredate": "2020-02-19",
+      "permanent": true,
+      "id": 15
+    }
+  ]
+}

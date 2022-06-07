@@ -1,0 +1,122 @@
+<div class="form-style-9">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <h3>Employee Form</h3><br>
+        <ul>
+            <li>
+                <h6>Name</h6>
+                <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)" class="errors">
+                    <div *ngIf="f.name.errors.required">
+                        Name is required.
+                    </div>
+                    <div *ngIf="f.name.errors.minlength">
+                        Name must be at least 4 characters long.
+                    </div>
+                </div>
+                <input type="text" formControlName="name" class="field-style field-split" placeholder="name">
+
+                <h6>Email</h6>
+                <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="errors">
+                    <div *ngIf="f.email.errors.required">
+                        Email is required.
+                    </div>
+                    <div *ngIf="f.email.errors.email">
+                        Email is not complete.
+                    </div>
+                </div>
+                <input type="text" formControlName="email" class="field-style field-split" placeholder="email">
+
+                <h6>Mobile</h6>
+                <div *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)" class="errors">
+                    <div *ngIf="f.mobile.errors.required">
+                        Mobile is required.
+                    </div>
+                </div>
+                <div *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)" class="errors">
+                    <div *ngIf="f.mobile.errors.pattern">
+                        Mobile is Number.
+                    </div>
+                </div>
+                <div *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)" class="errors">
+                    <div *ngIf="f.mobile.errors.minlength">
+                        Mobile is Number must be 10 Disit.
+                    </div>
+                </div>
+                <div *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)" class="errors">
+                    <div *ngIf="f.mobile.errors.maxlength">
+                        Mobile is Number must be 10 Disit.
+                    </div>
+                </div>
+
+                <input type="text" formControlName="mobile" class="field-style field-split" placeholder="mobile">
+
+                <h6>Department</h6>
+                <select formControlName="department" class="field-style field-split">
+                    <option value="">select department</option>
+                    <option *ngFor="let item of department" value="{{item}}">{{item}}</option>
+                </select>
+                <div *ngIf="f.department.invalid && (f.department.dirty || f.department.touched)" class="errors">
+                    <div *ngIf="f.department.errors.required">
+                        Department is required.
+                    </div>
+                </div>
+
+                <h6>Gender</h6>
+                <div *ngIf="f.gender.invalid && (f.gender.dirty || f.gender.touched)" class="errors">
+                    <div *ngIf="f.gender.errors.required">
+                        Gender is required.
+                    </div>
+                </div>
+                <input type="radio" formControlName="gender" value="male" checked> Male &nbsp;&nbsp;&nbsp;
+                <input type="radio" formControlName="gender" value="female"> Female &nbsp;&nbsp;&nbsp;
+                <input type="radio" formControlName="gender" value="other"> Other
+
+                <h6>Hire Date</h6>
+                <div *ngIf="f.gender.invalid && (f.hiredate.dirty || f.hiredate.touched)" class="errors">
+                    <div *ngIf="f.hiredate.errors.required">
+                        Hire Date is required.
+                    </div>
+                </div>
+                <input type="date" formControlName="hiredate" class="field-style field-split" placeholder="hiredate">
+
+                <h6>Permanent</h6>
+                <input type="checkbox" formControlName="permanent" class="field-style left" value="true">Permanent
+            </li>
+
+            <li>
+                <span (click)="addNewAddress()" style="cursor:pointer;" class="fa fa-plus"> Add new
+                    Address</span><br><br>
+
+                <div formArrayName="address">
+                    <div *ngFor="let comp of employeeForm.controls.address.controls; let i=index">
+                        <h6>address {{i+1}}: </h6>
+                        <div [formGroupName]="i">
+                            <span (click)="deleteAddress(i)" style="cursor:pointer;"
+                                class="fa fa-minus right">Delete</span>
+
+                            <div *ngIf="add.controls[i].get('city').invalid && (add.controls[i].get('city').dirty || add.controls[i].get('city').touched)"
+                                class="errors">
+                                <div *ngIf="add.controls[i].get('city').errors.required">
+                                    City is required.
+                                </div>
+                            </div>
+                            <input formControlName="city" placeholder="city" class="field-style field-split">
+
+                            <div *ngIf="add.controls[i].get('zip').invalid && (add.controls[i].get('zip').dirty || add.controls[i].get('zip').touched)"
+                                class="errors">
+                                <div *ngIf="add.controls[i].get('zip').errors.required">
+                                    Zip is required.
+                                </div>
+                            </div>
+                            <input formControlName="zip" placeholder="zip" class="field-style field-split">
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+            <li>
+                <button type="submit" class="field-style" [disabled]="!employeeForm.valid">Save</button>
+                <button class="field-style" type="reset">Clear</button>
+            </li>
+        </ul>
+    </form>
+</div>
